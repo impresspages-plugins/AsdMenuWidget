@@ -4,7 +4,7 @@
  * Widget controller
  */
 
-namespace Plugin\CpThemeWidgets\Widget\Menu;
+namespace Plugin\AsdMenuWidget\Widget\Menu;
 
 class Controller extends \Ip\WidgetController
 {
@@ -14,12 +14,6 @@ class Controller extends \Ip\WidgetController
 
     public function generateHtml( $revisionId, $widgetId, $data, $skin )
     {
-        //reikia užsetinti dabartinį peig'ą, nes inline image nuo to priklauso. Kai pergeneruojamas widget'o preview, ipimage ieško current page.
-        /*
-        $revision = \Ip\Internal\Revision::getRevision( $revisionId );
-        $page = ipContent()->getPage( $revision['pageId'] );
-        ipContent()->_setCurrentPage( $page );
-        */
         if( empty( $data['serialized'] ) ) {
 			$data['serialized'] = '';
 		} else {
@@ -33,16 +27,7 @@ class Controller extends \Ip\WidgetController
     public function adminHtmlSnippet()
     {
         $form = new \Ip\Form();
-        /*
-        $form->setEnvironment(\Ip\Form::ENVIRONMENT_ADMIN);
-        $field = new \Ip\Form\Field\Url(
-            array(
-                'name' => 'redirectUrl',
-                'label' => __('Redirect', 'Ip-admin', FALSE),
-                'value' => ''
-            ));
-        $form->addField($field);
-        */
+
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[menu][name]',

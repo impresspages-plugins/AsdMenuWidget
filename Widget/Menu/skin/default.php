@@ -14,5 +14,4 @@
             <?php endforeach; ?>
         <?php endif;?>
     </ul>
-    <?php //var_dump( $testas ); ?>
 <?php endif; ?>
