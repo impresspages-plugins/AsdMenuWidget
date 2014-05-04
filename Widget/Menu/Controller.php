@@ -9,18 +9,20 @@ namespace Plugin\AsdMenuWidget\Widget\Menu;
 class Controller extends \Ip\WidgetController
 {
     public function getTitle() {
-        return __('Menu with icons', 'AsdMenuWidget', false);
+        return __('Menu', 'AsdMenuWidget', false);
     }
 
     public function generateHtml( $revisionId, $widgetId, $data, $skin )
     {
+        $revision = \Ip\Internal\Revision::getRevision( $revisionId );
+        $page = ipContent()->getPage( $revision['pageId'] );
+        ipContent()->_setCurrentPage( $page );
         if( empty( $data['serialized'] ) ) {
-                    $data['serialized'] = '';
-		} else {
+            $data['serialized'] = '';
+        } else {
             parse_str( $data['serialized'], $data );
             $data['currentLink'] = $revisionId;
         }
-        $data['testas'] = $revisionId;
         return parent::generateHtml( $revisionId, $widgetId, $data, $skin );
     }
 
@@ -28,18 +30,22 @@ class Controller extends \Ip\WidgetController
     {
         $form = new \Ip\Form();
 
-        $form->addField(new \Ip\Form\Field\Text(
+        $results = Model::getTopMenusList();
+        
+        $form->addField(new \Ip\Form\Field\Select(
             array(
                 'name' => 'data[menu][name]',
-                'label' => 'Menu name',
+                'label' => __( 'Menu name', 'AsdMenuWidget' ),
+                'values' => $results
             )
         ));
         
-        $form->addFieldset(new \Ip\Form\Fieldset('Options'));
+        $form->addFieldset(new \Ip\Form\Fieldset(__( 'Options', 'AsdMenuWidget' )));
+        
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[menu][class]',
-                'label' => __( 'Class', 'AsdMenuWidget' ),
+                'label' => __( 'Class name', 'AsdMenuWidget' ),
                 'value' => 'menu'
             )
         ));
@@ -47,7 +53,7 @@ class Controller extends \Ip\WidgetController
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[menu][parent]',
-                'label' => __( 'Parent class', 'AsdMenuWidget' ),
+                'label' => __( 'Parent class name', 'AsdMenuWidget' ),
                 'value' => 'parent'
             )
         ));
@@ -55,7 +61,7 @@ class Controller extends \Ip\WidgetController
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[menu][active]',
-                'label' => __( 'Active class', 'AsdMenuWidget' ),
+                'label' => __( 'Active class name', 'AsdMenuWidget' ),
                 'value' => 'active'
             )
         ));
@@ -64,29 +70,37 @@ class Controller extends \Ip\WidgetController
             array(
                 'name' => 'data[menu][depth]',
                 'label' => __( 'Depth', 'AsdMenuWidget' ),
-                'value' => '0'
+                'value' => '0',
+                'note' => __( '0 - show all menu levels', 'AsdMenuWidget' ),
             )
         ));
         
-        $form->addFieldset(new \Ip\Form\Fieldset('Icons'));
+        $form->addFieldset(new \Ip\Form\Fieldset('Icon options'));
         $form->addField(new \Ip\Form\Field\Checkbox(
             array(
                 'name' => 'data[icon][enable]',
                 'label' => __( 'Enable icons', 'AsdMenuWidget' ),
             )
         ));
+        $form->addField(new \Ip\Form\Field\Checkbox(
+            array(
+                'name' => 'data[icon][empty]',
+                'label' => __( 'Show empty image', 'AsdMenuWidget' ),
+                'note' => __( 'If no image chosen, show transparent image.', 'AsdMenuWidget' ),
+            )
+        ));
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[icon][width]',
                 'label' => __( 'Icon width', 'AsdMenuWidget' ),
-                'value' => '24'
+                'value' => '50'
             )
         ));
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[icon][height]',
                 'label' => __( 'Icon height', 'AsdMenuWidget' ),
-                'value' => '24'
+                'value' => '50'
             )
         ));
         
