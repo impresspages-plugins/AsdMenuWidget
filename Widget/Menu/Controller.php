@@ -9,13 +9,13 @@ namespace Plugin\AsdMenuWidget\Widget\Menu;
 class Controller extends \Ip\WidgetController
 {
     public function getTitle() {
-        return __('Menu', 'CpThemeWidgets', false);
+        return __('Menu with icons', 'AsdMenuWidget', false);
     }
 
     public function generateHtml( $revisionId, $widgetId, $data, $skin )
     {
         if( empty( $data['serialized'] ) ) {
-			$data['serialized'] = '';
+                    $data['serialized'] = '';
 		} else {
             parse_str( $data['serialized'], $data );
             $data['currentLink'] = $revisionId;
@@ -35,12 +35,11 @@ class Controller extends \Ip\WidgetController
             )
         ));
         
-        
         $form->addFieldset(new \Ip\Form\Fieldset('Options'));
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[menu][class]',
-                'label' => 'Class',
+                'label' => __( 'Class', 'AsdMenuWidget' ),
                 'value' => 'menu'
             )
         ));
@@ -48,7 +47,7 @@ class Controller extends \Ip\WidgetController
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[menu][parent]',
-                'label' => 'Parent class',
+                'label' => __( 'Parent class', 'AsdMenuWidget' ),
                 'value' => 'parent'
             )
         ));
@@ -56,7 +55,7 @@ class Controller extends \Ip\WidgetController
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[menu][active]',
-                'label' => 'Active class',
+                'label' => __( 'Active class', 'AsdMenuWidget' ),
                 'value' => 'active'
             )
         ));
@@ -64,29 +63,29 @@ class Controller extends \Ip\WidgetController
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[menu][depth]',
-                'label' => 'Depth',
+                'label' => __( 'Depth', 'AsdMenuWidget' ),
                 'value' => '0'
             )
         ));
         
-        $form->addFieldset(new \Ip\Form\Fieldset('Link icons'));
+        $form->addFieldset(new \Ip\Form\Fieldset('Icons'));
         $form->addField(new \Ip\Form\Field\Checkbox(
             array(
                 'name' => 'data[icon][enable]',
-                'label' => 'Enable link icons',
+                'label' => __( 'Enable icons', 'AsdMenuWidget' ),
             )
         ));
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[icon][width]',
-                'label' => 'Width',
+                'label' => __( 'Icon width', 'AsdMenuWidget' ),
                 'value' => '24'
             )
         ));
         $form->addField(new \Ip\Form\Field\Text(
             array(
                 'name' => 'data[icon][height]',
-                'label' => 'Height',
+                'label' => __( 'Icon height', 'AsdMenuWidget' ),
                 'value' => '24'
             )
         ));

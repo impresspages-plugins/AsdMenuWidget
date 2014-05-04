@@ -4,14 +4,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><?php _e('Menu options', 'CpThemeWidgets'); ?></h4>
+                    <h4 class="modal-title"><?php _e('Menu options', 'AsdMenuWidget'); ?></h4>
                 </div>
                 <div class="modal-body">
                     <?php echo $form->render(); ?>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Cancel', 'Ip-admin'); ?></button>
-                    <button type="button" class="btn btn-primary ipsConfirm"><?php _e('Confirm', 'Ip-admin'); ?></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Cancel', 'AsdMenuWidget'); ?></button>
+                    <button type="button" class="btn btn-primary ipsConfirm"><?php _e('Confirm', 'AsdMenuWidget'); ?></button>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
 
         // if legend exist it means its option group
         if ($legend.length) {
-            // adding required attributes to make collapse() to work
+            // adding required attributes to make collapse() work
             $legend
                 .attr('data-toggle', 'collapse')
                 .attr('data-target', '#propertiesCollapse'+index)
