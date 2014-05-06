@@ -12,10 +12,10 @@ class Model
     {
         $languageCode = ipContent()->getCurrentLanguage()->code;
         $table = ipTable('page');
-        $sql = "SELECT `title`, `alias` FROM $table WHERE `parentId` = 0 AND `languageCode` = '{$languageCode}' ORDER BY `title` ASC";
+        $sql = "SELECT `title`, `alias`, `languageCode` FROM $table WHERE `parentId` = 0 ORDER BY `languageCode` ASC, `title` ASC";
         $results = ipDb()->fetchAll( $sql );
         foreach( $results as $result ) {
-            $returnData[] = array( $result['alias'], $result['title'] );
+            $returnData[] = array( $result['alias'], $result['languageCode'] . ' - ' . $result['title'] );
         }
         return $returnData;
     }
