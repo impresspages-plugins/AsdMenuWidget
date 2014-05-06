@@ -10,7 +10,7 @@ class Model
 {
     public static function getTopMenusList()
     {
-        $languageCode = 'en';
+        $languageCode = ipContent()->getCurrentLanguage()->code;
         $table = ipTable('page');
         $sql = "SELECT `title`, `alias` FROM $table WHERE `parentId` = 0 AND `languageCode` = '{$languageCode}' ORDER BY `title` ASC";
         $results = ipDb()->fetchAll( $sql );
