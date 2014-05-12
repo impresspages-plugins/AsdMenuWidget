@@ -2,21 +2,16 @@ IpWidget_Menu = function() {
 
     this.$widgetObject = null;
 
-
     this.init = function($widgetObject, data) {
         this.widgetObject = $widgetObject;
         this.data = data;
-        this.$editButton = $('<button class="btn btn-controls btn-xs _edit ipsWidgetEdit" title="Edit"><i class="fa fa-pencil"></i></button>');
-        this.widgetObject.find('.ipsControls').append(this.$editButton);
-
         var context = this;
-        this.$editButton.on('click', $.proxy(openPopup, context));
-
+        $('.ipsWidgetEdit').on('click', $.proxy(openPopup, context));
     };
 
     this.onAdd = function() {
         $.proxy(openPopup, this)();
-    }
+    };
 
     var openPopup = function() {
         var $this = this;
@@ -25,7 +20,7 @@ IpWidget_Menu = function() {
 
         var $fields = new Object();
         
-        if( this.data.serialized !== undefined ) {
+        if( this.data !== undefined ) {
             data = QueryStringToJSON(this.data.serialized);
             $.each(data, function( ind, val ) {
                 var $el = $this.popup.find('[name="'+ind+'"]');
