@@ -6,7 +6,8 @@ IpWidget_Menu = function() {
         this.widgetObject = $widgetObject;
         this.data = data;
         var context = this;
-        $('.ipsWidgetEdit').on('click', $.proxy(openPopup, context));
+        this.$button = this.widgetObject.find('.ipsWidgetEdit');
+        this.$button.on('click', $.proxy(openPopup, context));
     };
 
     this.onAdd = function() {
@@ -20,7 +21,7 @@ IpWidget_Menu = function() {
 
         var $fields = new Object();
         
-        if( this.data !== undefined ) {
+        if( this.data.serialized !== undefined ) {
             data = QueryStringToJSON(this.data.serialized);
             $.each(data, function( ind, val ) {
                 var $el = $this.popup.find('[name="'+ind+'"]');
