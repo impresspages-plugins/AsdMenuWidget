@@ -2,6 +2,6 @@
     "title": "Menu Widget",
     "version": "1.00",
     "name": "AsdMenuWidget",
-    "description": "Simple menu widget with icons.",
-    "author": "ASD"
+    "description": "Simple menu widget with optional icons.",
+    "author": "Simonas Dimavičius"
 }
