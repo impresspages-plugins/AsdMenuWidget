@@ -14,29 +14,71 @@ class Controller extends \Ip\WidgetController
 
     public function generateHtml( $revisionId, $widgetId, $data, $skin )
     {
-        $revision = \Ip\Internal\Revision::getRevision( $revisionId );
-        $page = ipContent()->getPage( $revision['pageId'] );
-        ipContent()->_setCurrentPage( $page );
         if( empty( $data['serialized'] ) ) {
             $data['serialized'] = '';
         } else {
             parse_str( $data['serialized'], $data );
             $data['currentLink'] = $revisionId;
         }
-        return parent::generateHtml( $revisionId, $widgetId, $data, $skin );
+
+        if( isset( $data['data']['menu']['visibility'] ) ) {
+            if( $data['data']['menu']['visibility'] == 0 ) {
+                return parent::generateHtml( $revisionId, $widgetId, $data, $skin );
+            } else {
+                if( !empty( $revisionId ) ) {
+                        $revision = \Ip\Internal\Revision::getRevision( $revisionId );
+                        $pageId = $revision['pageId'];
+                    } else {
+                        $pageId = $data['data']['menu']['pageId'];
+                    }
+                if( $data['data']['menu']['visibility'] == 1 ) {
+                    $parentId = Model::getParentId( $data['data']['menu']['name'] );
+                    if( $parentId == $pageId ) {
+                        return parent::generateHtml( $revisionId, $widgetId, $data, $skin );
+                    } elseif( Model::checkIfChildren( array( $parentId ), $pageId ) ) {
+                        return parent::generateHtml( $revisionId, $widgetId, $data, $skin );
+                    }
+                } elseif( $data['data']['menu']['visibility'] == 2 ) {
+                    if( $data['data']['menu']['pageId'] == $pageId ) {
+                        return parent::generateHtml( $revisionId, $widgetId, $data, $skin );
+                    }
+                }
+            }
+        }
     }
 
     public function adminHtmlSnippet()
     {
         $form = new \Ip\Form();
 
-        $results = Model::getTopMenusList();
+        $results = Model::getMenusList();
         
         $form->addField(new \Ip\Form\Field\Select(
             array(
                 'name' => 'data[menu][name]',
                 'label' => __( 'Menu name', 'AsdMenuWidget' ),
                 'values' => $results
+            )
+        ));
+        
+        $visibilityOptions = array(
+            array( 0, __( 'All pages', 'AsdMenuWidget' ) ),
+            array( 1, __( 'Parent page and its childrens', 'AsdMenuWidget' ) ),
+            array( 2, __( 'Current page only', 'AsdMenuWidget' ) ),
+        );
+        
+        $form->addField(new \Ip\Form\Field\Select(
+            array(
+                'name' => 'data[menu][visibility]',
+                'label' => __( 'Visibility', 'AsdMenuWidget' ),
+                'values' => $visibilityOptions
+            )
+        ));
+        
+        $form->addField(new \Ip\Form\Field\Hidden(
+            array(
+                'name' => 'data[menu][pageId]',
+                'value' => ipContent()->getCurrentPage()->getId()
             )
         ));
         
