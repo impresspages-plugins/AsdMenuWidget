@@ -19,7 +19,7 @@
                         <?php echo $item->getTitle(); ?>
                     </a>
                     <?php $data['menu']['class'] = $data['menu']['parent']; $data['items'] = $item->getChildren(); if( !empty( $data['items'] ) && ( $data['menu']['depth'] == 0 || $depth < $data['menu']['depth'] ) ): ?>
-                        <?php echo ipView( 'menu.php', array( 'data' => $data, 'depth' => ++$depth ) )->render(); ?>
+                        <?php echo ipView( 'menu.php', array( 'data' => $data, 'depth' => $depth+1 ) )->render(); ?>
                     <?php endif; ?>
                 </li>
             <?php endforeach; ?>
