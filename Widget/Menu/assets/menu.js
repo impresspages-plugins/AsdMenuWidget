@@ -52,7 +52,7 @@ IpWidget_Menu = function() {
 };
 
 function QueryStringToJSON(str) { 
-    var pairs = str.replace( /%5B/g, '[' ).replace( /%5D/g, ']' ).split('&');
+    var pairs = str.replace('+', ' ').replace( /%5B/g, '[' ).replace( /%5D/g, ']' ).split('&');
     
     var result = {};
     pairs.forEach(function(pair) {
