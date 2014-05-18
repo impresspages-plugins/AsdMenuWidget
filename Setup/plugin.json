@@ -3,5 +3,14 @@
     "version": "1.00",
     "name": "AsdMenuWidget",
     "description": "Simple menu widget with optional icons.",
-    "author": "Simonas Dimavičius"
+    "author": "Simonas Dimavičius",
+    "options": [
+        {
+            "label": "Enable multilanguage choice",
+            "name": "multilanguage",
+            "type": "select",
+            "default": "No",
+            "values": ["No", "Yes"]
+        }
+    ]
 }
