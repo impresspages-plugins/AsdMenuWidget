@@ -25,6 +25,33 @@ class Model
         
         return $returnData;
     }
+    
+    public static function getParentId( $parentName ) {
+        return ipDb()->selectValue( 'page', 'id', array( 'alias' => $parentName ) );
+    }
+    
+    public static function checkIfChildren( $parentIds, $id ) {
+        $parentIds = implode( ',', $parentIds );
+        $table = ipTable('page');
+        $sql = "SELECT `id` FROM $table WHERE `parentId` IN ($parentIds) AND `isVisible` = 1 AND `isDeleted` = 0 ";
+        $results = ipDb()->fetchAll( $sql );
+        $ids = array();
+        $found = false;
+        foreach( $results as $result ) {
+            $ids[] = $result['id'];
+            if( $result['id'] == $id ) {
+                $found = true;
+                break;
+            }
+        }
+        if( $found ) {
+            return true;
+        } elseif( !empty( $ids ) ) {
+            return self::checkIfChildren( $ids, $id );
+        } else {
+            return false;
+        }
+    }
 }
 
 function makeMenu( $target, $allPages, $level, $multilanguage ) {
