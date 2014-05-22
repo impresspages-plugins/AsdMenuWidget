@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Widget controller
- */
-
 namespace Plugin\AsdMenuWidget\Widget\Menu;
 
 class Controller extends \Ip\WidgetController
