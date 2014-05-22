@@ -109,7 +109,7 @@ class Controller extends \Ip\WidgetController
                 'name' => 'data[menu][depth]',
                 'label' => __( 'Depth', 'AsdMenuWidget' ),
                 'value' => '0',
-                'note' => __( '0 - show all menu levels', 'AsdMenuWidget' ),
+                'note' => __( 'empty or 0 value shows all menu levels', 'AsdMenuWidget' ),
             )
         ));
         

@@ -18,7 +18,7 @@
                         <?php endif; ?>
                         <?php echo $item->getTitle(); ?>
                     </a>
-                    <?php $data['menu']['class'] = $data['menu']['parent']; $data['items'] = $item->getChildren(); if( !empty( $data['items'] ) && ( $data['menu']['depth'] == 0 || $depth < $data['menu']['depth'] ) ): ?>
+                    <?php $data['menu']['class'] = $data['menu']['parent']; $data['items'] = $item->getChildren(); if( !empty( $data['items'] ) && ( empty( $data['menu']['depth'] ) || $depth < $data['menu']['depth'] ) ): ?>
                         <?php echo ipView( 'menu.php', array( 'data' => $data, 'depth' => $depth+1 ) )->render(); ?>
                     <?php endif; ?>
                 </li>
