@@ -22,11 +22,11 @@ class Controller extends \Ip\WidgetController
                 return parent::generateHtml( $revisionId, $widgetId, $data, $skin );
             } else {
                 if( !empty( $revisionId ) ) {
-                        $revision = \Ip\Internal\Revision::getRevision( $revisionId );
-                        $pageId = $revision['pageId'];
-                    } else {
-                        $pageId = $data['data']['menu']['pageId'];
-                    }
+                    $revision = \Ip\Internal\Revision::getRevision( $revisionId );
+                    $pageId = $revision['pageId'];
+                } else {
+                    $pageId = $data['data']['menu']['pageId'];
+                }
                 if( $data['data']['menu']['visibility'] == 1 ) {
                     $parentId = Model::getParentId( $data['data']['menu']['name'] );
                     if( $parentId == $pageId ) {
@@ -115,22 +115,23 @@ class Controller extends \Ip\WidgetController
         ));
         $yesNo = array(
             array( 0, __( 'No', 'AsdMenuWidget' ) ),
-            array( 1, __( 'Parent page and its childrens', 'AsdMenuWidget' ) ),
-            array( 2, __( 'Current page only', 'AsdMenuWidget' ) ),
+            array( 1, __( 'Yes', 'AsdMenuWidget' ) ),
         );
         
         $form->addFieldset(new \Ip\Form\Fieldset('Icon options'));
-        $form->addField(new \Ip\Form\Field\Checkbox(
+        $form->addField(new \Ip\Form\Field\Select(
             array(
                 'name' => 'data[icon][enable]',
                 'label' => __( 'Enable icons', 'AsdMenuWidget' ),
+                'values' => $yesNo
             )
         ));
-        $form->addField(new \Ip\Form\Field\Checkbox(
+        $form->addField(new \Ip\Form\Field\Select(
             array(
                 'name' => 'data[icon][empty]',
                 'label' => __( 'Show empty image', 'AsdMenuWidget' ),
-                'note' => __( 'If no image chosen, show transparent image.', 'AsdMenuWidget' ),
+                'note' => __( 'If no image chosen, shows transparent image.', 'AsdMenuWidget' ),
+                'values' => $yesNo
             )
         ));
         $form->addField(new \Ip\Form\Field\Text(
