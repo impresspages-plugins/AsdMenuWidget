@@ -41,6 +41,7 @@ class Controller extends \Ip\WidgetController
                 }
             }
         }
+        return parent::generateHtml( $revisionId, $widgetId, array(), $skin );
     }
 
     public function adminHtmlSnippet()
@@ -112,6 +113,11 @@ class Controller extends \Ip\WidgetController
                 'note' => __( 'empty or 0 value shows all menu levels', 'AsdMenuWidget' ),
             )
         ));
+        $yesNo = array(
+            array( 0, __( 'No', 'AsdMenuWidget' ) ),
+            array( 1, __( 'Parent page and its childrens', 'AsdMenuWidget' ) ),
+            array( 2, __( 'Current page only', 'AsdMenuWidget' ) ),
+        );
         
         $form->addFieldset(new \Ip\Form\Fieldset('Icon options'));
         $form->addField(new \Ip\Form\Field\Checkbox(
