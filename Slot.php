@@ -1,0 +1,37 @@
+<?php
+namespace Plugin\AsdTranslate;
+ 
+class Slot {
+    public static function image($params)
+    {
+        $options = array();
+        $defaultValue = '';
+        $cssClass = '';
+        if (empty($params['id'])) {
+            throw new \Ip\Exception("Ip.image slot requires parameter 'id'");
+        }
+        $key = $params['id'];
+
+        if (isset($params['default'])) {
+            $defaultValue = $params['default'];
+        }
+
+        if (isset($params['width'])) {
+            $options['width'] = $params['width'];
+        }
+        if (isset($params['height'])) {
+            $options['height'] = $params['height'];
+        }
+        
+        if (isset($params['pageId'])) {
+            $options['pageId'] = $params['pageId'];
+        }
+        
+        if (isset($params['class'])) {
+            $cssClass = $params['class'];
+        }
+
+        $inlineManagementService = new \Ip\Internal\InlineManagement\Service();
+        return $inlineManagementService->generateManagedImage($key, $defaultValue, $options, $cssClass);
+    }
+}

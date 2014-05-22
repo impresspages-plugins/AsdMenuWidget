@@ -4,7 +4,7 @@
             <?php foreach( $items as $item ): $i++; ?>
                 <li <?php echo $item->isCurrent() ? 'class="'.$data['menu']['active'].'"' : null; ?>>
                     <a href="<?php echo $item->getUrl(); ?>">
-                        <?php if( isset( $data['icon']['enable'] ) ): ?>
+                        <?php if( !empty( $data['icon']['enable'] ) ): ?>
                             <?php 
                                 if( ipIsManagementState() ) {
                                     $defaultImage = "http://dummyimage.com/{$data['icon']['width']}x{$data['icon']['height']}/f5f5f5/888";
@@ -14,7 +14,7 @@
                                     $defaultImage = '';
                                 }
                             ?>
-                            <span class="icon-place"><?php echo ipSlot( 'image', array( 'id' => "asd-menu-item-image-{$data['menu']['name']}-{$depth}-{$i}", 'height' => $data['icon']['height'], 'width' => $data['icon']['width'], 'default' => $defaultImage ) ); ?></span>
+                            <span class="icon-place"><?php echo ipSlot( 'image', array( 'id' => "asd-menu-item-image-{$data['menu']['name']}-{$depth}-{$i}", 'pageId' => $data['menu']['pageId'], 'height' => $data['icon']['height'], 'width' => $data['icon']['width'], 'default' => $defaultImage ) ); ?></span>
                         <?php endif; ?>
                         <?php echo $item->getTitle(); ?>
                     </a>
