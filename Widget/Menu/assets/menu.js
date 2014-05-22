@@ -19,31 +19,23 @@ IpWidget_Menu = function() {
         this.popup = $('#ipWidgetMenuPopup');
         this.confirmButton = $this.popup.find('.ipsConfirm');
 
-        var $fields = new Object();
-        
         if( this.data.serialized !== undefined ) {
             data = QueryStringToJSON(this.data.serialized);
             $.each(data, function( ind, val ) {
                 var $el = $this.popup.find('[name="'+ind+'"]');
-                if( $el.attr('type') === 'checkbox' ) {
-                    $el.attr('checked',true);
-                } else {
-                    $el.val(val);
-                }
+                $el.val(val);
             }); 
         }
         this.popup.modal(); // open modal popup
-
         this.confirmButton.off(); // ensure we will not bind second time
         this.confirmButton.on('click', $.proxy(save, this));
     };
 
     var save = function() {
-        var data = new Object();
-        data = {
+        this.data = {
             serialized : this.popup.find('form').serialize()
         };
-        this.widgetObject.save(data, 1, function() {
+        this.widgetObject.save(this.data, 1, function() {
             $('.ipsModuleInlineManagementImage').ipModuleInlineManagementImage();
         });
         this.popup.modal('hide');
