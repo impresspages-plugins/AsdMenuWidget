@@ -30,6 +30,14 @@ class Slot {
         if (isset($params['class'])) {
             $cssClass = $params['class'];
         }
+        
+        if (isset($params['alt'])) {
+            $options['attributes']['alt'] = $params['alt'];
+        }
+        
+        if (isset($params['title'])) {
+            $options['attributes']['title'] = $params['title'];
+        }
 
         $inlineManagementService = new \Ip\Internal\InlineManagement\Service();
         return $inlineManagementService->generateManagedImage($key, $defaultValue, $options, $cssClass);

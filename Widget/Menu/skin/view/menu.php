@@ -13,10 +13,11 @@
                                 } else {
                                     $defaultImage = '';
                                 }
+                                $title = $item->getTitle();
                             ?>
-                            <span class="icon-place"><?php echo ipSlot( 'image', array( 'id' => "asd-menu-item-image-{$data['menu']['name']}-{$depth}-{$i}", 'pageId' => $data['menu']['pageId'], 'height' => $data['icon']['height'], 'width' => $data['icon']['width'], 'default' => $defaultImage ) ); ?></span>
+                            <span class="icon-place"><?php echo ipSlot( 'image', array( 'id' => "asd-menu-item-image-{$data['menu']['name']}-{$depth}-{$i}", 'pageId' => $data['menu']['pageId'], 'height' => $data['icon']['height'], 'width' => $data['icon']['width'], 'default' => $defaultImage, 'alt' => $title, 'title' => $title ) ); ?></span>
                             <?php if( !empty( $data['icon']['text'] ) ): ?>
-                                <?php echo $item->getTitle(); ?>
+                                <?php echo $title; ?>
                             <?php endif; ?>
                         <?php else: ?>
                             <?php echo $item->getTitle(); ?>
