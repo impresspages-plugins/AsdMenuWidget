@@ -128,6 +128,13 @@ class Controller extends \Ip\WidgetController
         ));
         $form->addField(new \Ip\Form\Field\Select(
             array(
+                'name' => 'data[icon][text]',
+                'label' => __( 'Show text', 'AsdMenuWidget' ),
+                'values' => $yesNo
+            )
+        ));
+        $form->addField(new \Ip\Form\Field\Select(
+            array(
                 'name' => 'data[icon][empty]',
                 'label' => __( 'Show empty image', 'AsdMenuWidget' ),
                 'note' => __( 'If no image chosen, shows transparent image.', 'AsdMenuWidget' ),

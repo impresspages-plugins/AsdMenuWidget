@@ -15,8 +15,12 @@
                                 }
                             ?>
                             <span class="icon-place"><?php echo ipSlot( 'image', array( 'id' => "asd-menu-item-image-{$data['menu']['name']}-{$depth}-{$i}", 'pageId' => $data['menu']['pageId'], 'height' => $data['icon']['height'], 'width' => $data['icon']['width'], 'default' => $defaultImage ) ); ?></span>
+                            <?php if( !empty( $data['icon']['text'] ) ): ?>
+                                <?php echo $item->getTitle(); ?>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <?php echo $item->getTitle(); ?>
                         <?php endif; ?>
-                        <?php echo $item->getTitle(); ?>
                     </a>
                     <?php $data['menu']['class'] = $data['menu']['parent']; $data['items'] = $item->getChildren(); if( !empty( $data['items'] ) && ( empty( $data['menu']['depth'] ) || $depth < $data['menu']['depth'] ) ): ?>
                         <?php echo ipView( 'menu.php', array( 'data' => $data, 'depth' => $depth+1 ) )->render(); ?>
