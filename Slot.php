@@ -1,5 +1,5 @@
 <?php
-namespace Plugin\AsdTranslate;
+namespace Plugin\AsdMenuWidget;
  
 class Slot {
     public static function image($params)
