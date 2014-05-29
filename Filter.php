@@ -12,7 +12,7 @@ class Filter {
                     'class' => '_edit ipsWidgetEdit',
                 )
             );
-            return $optionsMenu;
         }
+        return $optionsMenu;
     }
 }
