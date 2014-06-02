@@ -14,8 +14,11 @@
                                     $defaultImage = '';
                                 }
                                 $title = $item->getTitle();
+                                $image = ipSlot( 'image', array( 'id' => "asd-menu-item-image-{$data['menu']['name']}-{$depth}-{$i}", 'pageId' => $data['menu']['pageId'], 'height' => $data['icon']['height'], 'width' => $data['icon']['width'], 'default' => $defaultImage, 'alt' => $title, 'title' => $title ) );
                             ?>
-                            <span class="icon-place"><?php echo ipSlot( 'image', array( 'id' => "asd-menu-item-image-{$data['menu']['name']}-{$depth}-{$i}", 'pageId' => $data['menu']['pageId'], 'height' => $data['icon']['height'], 'width' => $data['icon']['width'], 'default' => $defaultImage, 'alt' => $title, 'title' => $title ) ); ?></span>
+                            <?php if( !empty( $image ) ): ?>
+                                <span class="icon-place"><?php echo $image; ?></span>
+                            <?php endif; ?>
                             <?php if( !empty( $data['icon']['text'] ) ): ?>
                                 <?php echo $title; ?>
                             <?php endif; ?>
